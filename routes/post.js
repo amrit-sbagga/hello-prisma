@@ -32,6 +32,26 @@ router.post('/', async(req, res) => {
     })
     res.json(newPost);
 
+});
+
+// get all posts associated with user
+router.get('/:user_id', async(req, res) => {
+
+    //read from path parameter
+    const { user_id } = req.params;
+
+    const posts = await post.findMany({
+        where:{
+            user_id : parseInt(user_id)
+        },
+        select : {
+            title: true,
+            created_at : true,
+            post : true,
+            user : true
+        }
+    });
+    res.json(posts);
 })
 
 module.exports = router;
