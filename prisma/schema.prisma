@@ -11,6 +11,7 @@ datasource db {
 }
 
 model User {
+  @@map(name: "user")
   id Int @default(autoincrement()) @id
   username String @db.VarChar(255) @unique
 }
